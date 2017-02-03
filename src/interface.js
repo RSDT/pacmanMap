@@ -173,7 +173,7 @@ var player = {
 			};
 function createMap(){
 	var center = { lat:	52.006808, 	lng:6.022500}; //-- Midden in het speel gebied.
-	map = new google.maps.Map(document.getElementById('map'),
+	var map = new google.maps.Map(document.getElementById('map'),
 		{	
 			zoom :	18,
 			center: center
@@ -184,6 +184,7 @@ function createMap(){
 			preserveViewport: true,
 			clickable: false
 		});
+	return map;
 }
 
 function createFireBaseDatabase(){
@@ -193,7 +194,7 @@ function createFireBaseDatabase(){
 	return firebase.database();
 }
 
-function Player(name){
+function Player(map, name){
 	if (name != "pacman" || name != "blinky"|| name != "clyde" || name != "pinky" || name != "inky"){
 		throw "name is not a players name";	
 	}
@@ -206,6 +207,9 @@ function Player(name){
 	this.open = true;
 	this.powerup = false;
 	this.animation = null;
+	this.getName(){
+		return name;
+	}
 	this.updateImg= function(){
 		var playerimg;
 		var imgloc;
